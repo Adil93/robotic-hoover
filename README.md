@@ -15,31 +15,16 @@ From the project root folder, Execute below steps:
 # API
 
 - Robotic Hoover Navigation API
-  - POST <host>/robotic/hoover
+  - POST {host}/robotic/hoover
   - Request : 
   ```json
   {
-    "roomSize": [
-        5,
-        5
-    ],
-    "coords": [
-        1,
-        2
-    ],
+    "roomSize": [ 5, 5 ],
+    "coords": [ 1, 2 ],
     "patches": [
-        [
-            1,
-            0
-        ],
-        [
-            2,
-            2
-        ],
-        [
-            2,
-            3
-        ]
+        [ 1, 0 ],
+        [ 2, 2 ],
+        [ 2, 3 ]
     ],
     "instructions": "NNESEESWNWW"
 }
@@ -48,10 +33,7 @@ From the project root folder, Execute below steps:
 - Response:
 ```json
 {
-    "coords": [
-        1,
-        3
-    ],
+    "coords": [ 1, 3 ],
     "patches": 1
 }
 ```
