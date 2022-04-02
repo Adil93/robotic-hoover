@@ -12,6 +12,78 @@ From the project root folder, Execute below steps:
 - Run using the maven command:
   - mvn springboot:run
 
+# API
+
+- Robotic Hoover Navigation API
+  - POST <host>/robotic/hoover
+  - Request : 
+  ```json
+  {
+    "roomSize": [
+        5,
+        5
+    ],
+    "coords": [
+        1,
+        2
+    ],
+    "patches": [
+        [
+            1,
+            0
+        ],
+        [
+            2,
+            2
+        ],
+        [
+            2,
+            3
+        ]
+    ],
+    "instructions": "NNESEESWNWW"
+}
+```
+```
+- Response:
+```json
+{
+    "coords": [
+        1,
+        3
+    ],
+    "patches": 1
+}
+```
+- Error Response
+  - Sample Missing Attribute Response 
+```json
+{
+    "errorId": "1474d8f1-35ec-40c7-9695-793000b5561c",
+    "errorCode": "INVALID_REQUEST",
+    "status": 400,
+    "message": "Invalid request body or parameters supplied",
+    "errors": [
+        {
+            "name": "coords",
+            "details": "must not be empty"
+        }
+    ]
+}
+
+```
+  - Sample UnProcessableEntity Exception
+
+```json
+{
+    "errorId": "4869130f-2e1b-46ec-9587-ebfa82109c7a",
+    "errorCode": "INVALID_COORDINATE_VALUE",
+    "status": 422,
+    "message": "Invalid Coordinate values",
+    "errors": []
+}
+```
+
 # Run Test
 
 - mvn test
@@ -20,10 +92,15 @@ From the project root folder, Execute below steps:
 - Running test will create target/jacoco.exec
 - Run -> Show Coverage Data --> select the jacoco.exec file
 
+# Accessing H2 DB
+- <host>/robotic/h2-console
+  - eg: localhost/robotic/h2-console  - (credentials in properties file)
+
 # TradeOffs
 - Assuming max room size coordinate X and Y in range (0 - Integer.MAX_VALUE)
 - No Validation of patch coordinate range, Algorithm won't pick the patch if it is not in the Room's maximum coordinate range.
 - Create the Navigation Request in DB before starting the actual navigation. So if something went wrong there will be an entry for the request without a related result entry in DB
+- Used H2 DB for the demo purpose. You can bring up a specific database using docker and give the data source info in properties file.
 
 # Future Scope
 - Can bring a status field to the navigation request entity and update it to complete once the navigation result is obtained.
