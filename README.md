@@ -75,7 +75,7 @@ From the project root folder, Execute below steps:
 - Run -> Show Coverage Data --> select the jacoco.exec file
 
 # Accessing H2 DB
-- <host>/robotic/h2-console
+- {host}/robotic/h2-console
   - eg: localhost/robotic/h2-console  - (credentials in properties file)
 
 # TradeOffs
