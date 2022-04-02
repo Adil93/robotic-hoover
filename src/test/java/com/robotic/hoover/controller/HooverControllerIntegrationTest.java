@@ -119,4 +119,18 @@ public class HooverControllerIntegrationTest {
         Assert.assertEquals("3", navigateResponseDto.getCoords().get(1).toString());
 
     }
+
+    @Test
+    public void navigate_success_return_navigate_result_skid_wall_ok() throws Exception {
+        String requestJson = objectMapper.writeValueAsString(TestData.validSkidWallRequestDto);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(NAVIGATE_ENDPOINT).contentType(MediaType.APPLICATION_JSON)
+                        .content(requestJson)
+                ).andExpect(status().isOk())
+                .andReturn();
+        NavigateResponseDto navigateResponseDto = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), NavigateResponseDto.class);
+        Assert.assertEquals(1, navigateResponseDto.getPatches());
+        Assert.assertEquals("0", navigateResponseDto.getCoords().get(0).toString());
+        Assert.assertEquals("3", navigateResponseDto.getCoords().get(1).toString());
+
+    }
 }

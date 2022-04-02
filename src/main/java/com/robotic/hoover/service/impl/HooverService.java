@@ -18,6 +18,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Adil Muthukoya
+ */
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -28,13 +31,29 @@ public class HooverService implements IHooverService {
     private NavigateRequestRepository navigateRequestRepository;
     private NavigateResultRepository navigateResultRepository;
 
+    /**
+     * @param navigateRequestDto
+     * @return navigateResponseDto
+     * @throws UnProcessableEntityException 1. Save the NavigateRequest
+     *                                      2. Navigate as per the request and return the navigation result
+     */
     @Override
     public NavigateResponseDto navigate(NavigateRequestDto navigateRequestDto) throws UnProcessableEntityException {
         validateRequest(navigateRequestDto);
         NavigateRequest createdRequest = navigateRequestRepository.save(mapper.mapToNavigateRequest(navigateRequestDto));
-        return mapper.mapToNavigateResponseDto(navigate(createdRequest));
+        NavigateResult navigateResult = navigate(createdRequest);
+        log.info("Hoover successfully navigated for request={}, result={}", createdRequest, navigateResult);
+        NavigateResponseDto navigateResponseDto = mapper.mapToNavigateResponseDto(navigateResult);
+        return navigateResponseDto;
     }
 
+    /**
+     * @param request
+     * @return NavigateResult
+     * 1. Get the current coordinate from the request
+     * 2. Create a final coordinate and track the latest moved coordinate in this.
+     * 3. Save the navigation result for the request and return it
+     */
     @Override
     public NavigateResult navigate(NavigateRequest request) {
 
@@ -66,6 +85,11 @@ public class HooverService implements IHooverService {
 
     }
 
+    /**
+     * @param currentCoordinate
+     * @param move
+     * @return the next possible moving coordinate.
+     */
     private Coordinate getMovingCoordinate(Coordinate currentCoordinate, char move) {
         Coordinate movingCoordinate = new Coordinate(currentCoordinate.getX(), currentCoordinate.getY());
 
@@ -88,6 +112,12 @@ public class HooverService implements IHooverService {
         return movingCoordinate;
     }
 
+    /**
+     * @param currentCoordinate
+     * @param movingCoordinate
+     * @param maxRoomCoordinate
+     * @return boolean indicating the move is possible or not
+     */
     private boolean canMove(Coordinate currentCoordinate, Coordinate movingCoordinate, Coordinate maxRoomCoordinate) {
         return !currentCoordinate.equals(movingCoordinate)
                 && movingCoordinate.getX() <= maxRoomCoordinate.getX()

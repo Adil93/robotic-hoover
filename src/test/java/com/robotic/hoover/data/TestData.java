@@ -13,6 +13,12 @@ public class TestData {
             Arrays.asList(Arrays.asList(1, 0), Arrays.asList(2, 2), Arrays.asList(2, 3)),
             SAMPLE_VALID_INSTRUCTION
     );
+    public static NavigateRequestDto validSkidWallRequestDto = new NavigateRequestDto(
+            Arrays.asList(5, 5),
+            Arrays.asList(1, 2),
+            Arrays.asList(Arrays.asList(1, 0), Arrays.asList(2, 2), Arrays.asList(2, 3)),
+            SAMPLE_VALID_INSTRUCTION + "WWWW"
+    );
 
     public static NavigateRequestDto negativeCoordinateRequestDto = new NavigateRequestDto(
             Arrays.asList(5, 5),

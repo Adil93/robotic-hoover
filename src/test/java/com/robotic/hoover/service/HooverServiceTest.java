@@ -129,4 +129,31 @@ public class HooverServiceTest {
 
     }
 
+    @Test
+    void navigate_success_navigate_request_skidding_the_wall() throws UnProcessableEntityException {
+        final Long savedNavigateRequestId = 123l;
+        final Long savedNavigateResultId = 321l;
+        NavigateRequestDto navigateRequestDto = new NavigateRequestDto();
+        navigateRequestDto.setInstructions(SAMPLE_VALID_INSTRUCTION);
+        navigateRequestDto.setRoomSize(Arrays.asList(5, 5));
+        navigateRequestDto.setCoords(Arrays.asList(1, 2));
+        navigateRequestDto.setPatches(Arrays.asList(Arrays.asList(1, 0), Arrays.asList(2, 2), Arrays.asList(2, 3)));
+
+
+        NavigateRequest navigateRequest = new Mapper().mapToNavigateRequest(TestData.validSkidWallRequestDto);
+        NavigateResult navigateResult = new NavigateResult(navigateRequest, new Coordinate(0, 3), 1);
+
+        navigateRequest.setId(savedNavigateRequestId);
+        navigateResult.setId(savedNavigateResultId);
+
+        when(navigateResultRepository.save(ArgumentMatchers.any(NavigateResult.class))).thenReturn(navigateResult);
+        NavigateResult navigateResult1 = hooverService.navigate(navigateRequest);
+
+        Assert.assertEquals(1, navigateResult1.getNoOfPatchesCovered());
+        Assert.assertEquals(0, navigateResult1.getFinalPosition().getX());
+        Assert.assertEquals(3, navigateResult1.getFinalPosition().getY());
+        Assert.assertEquals(navigateRequest.getInstructions(), navigateResult1.getNavigateRequest().getInstructions());
+
+    }
+
 }

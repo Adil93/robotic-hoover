@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * @author Adil Muthukoya
+ */
 @RestController
 @RequestMapping("hoover")
 @AllArgsConstructor
@@ -25,7 +28,7 @@ public class HooverController {
 
     @PostMapping(value = "navigate", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<NavigateResponseDto> navigate(@RequestBody @Valid NavigateRequestDto navigateRequestDto) throws UnProcessableEntityException {
-        log.info("Begin robotic hoover navigate {}", navigateRequestDto.toString());
+        log.info("Begin robotic hoover navigation");
         return ResponseEntity.ok(hooverService.navigate(navigateRequestDto));
     }
 }
