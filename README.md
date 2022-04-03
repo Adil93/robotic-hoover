@@ -79,8 +79,8 @@ From the project root folder, Execute below steps:
 
 # TradeOffs
 - Assuming max room size coordinate X and Y in range (0 - Integer.MAX_VALUE)
-- No Validation of patch coordinate range, Algorithm won't pick the patch if it is not in the Room's maximum coordinate range.
-- Create the Navigation Request in DB before starting the actual navigation. So if something went wrong there will be an entry for the request without a related result entry in DB
+- No Validation of patch coordinate range, Algorithm won't pick the patch if it is not within the Room's maximum coordinate range.
+- Create the Navigation Request in DB before starting the actual navigation. If something went wrong there will be an entry for the request without a related result entry in DB
 - Used H2 DB for the demo purpose. You can bring up a specific database using docker and give the data source info in properties file.
 
 # Future Scope
