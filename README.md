@@ -17,7 +17,7 @@ From the project root folder, Execute below steps:
 - Robotic Hoover Navigation API
   - POST {host}/robotic/hoover
   - Request : 
-  ```json
+```json
   {
     "roomSize": [ 5, 5 ],
     "coords": [ 1, 2 ],
@@ -29,7 +29,8 @@ From the project root folder, Execute below steps:
     "instructions": "NNESEESWNWW"
 }
 ```
-```
+
+
 - Response:
 ```json
 {
@@ -37,7 +38,7 @@ From the project root folder, Execute below steps:
     "patches": 1
 }
 ```
-- Error Response
+- Error Responses :
   - Sample Missing Attribute Response 
 ```json
 {
@@ -52,10 +53,8 @@ From the project root folder, Execute below steps:
         }
     ]
 }
-
 ```
-  - Sample UnProcessableEntity Exception
-
+- Sample UnProcessableEntity Exception
 ```json
 {
     "errorId": "4869130f-2e1b-46ec-9587-ebfa82109c7a",
@@ -88,5 +87,7 @@ From the project root folder, Execute below steps:
 - Can bring a status field to the navigation request entity and update it to complete once the navigation result is obtained.
 - Set up a cron to check the pending navigation request and re-trigger it at EOD.
 - Can check for duplicate requests and obtain the result directly from DB rather than executing the whole navigation.
+- Can change the switch case in canMove function and introduce a Direction interface with a move API.
+  Each direction can have classes implementing the Direction interface.
 
 

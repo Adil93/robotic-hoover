@@ -2,7 +2,6 @@ package com.robotic.hoover.service;
 
 import com.robotic.hoover.data.TestData;
 import com.robotic.hoover.dto.Coordinate;
-import com.robotic.hoover.dto.request.NavigateRequestDto;
 import com.robotic.hoover.dto.response.NavigateResponseDto;
 import com.robotic.hoover.entity.NavigateRequest;
 import com.robotic.hoover.entity.NavigateResult;
@@ -21,8 +20,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -108,12 +105,6 @@ public class HooverServiceTest {
     void navigate_success_navigate_request() throws UnProcessableEntityException {
         final Long savedNavigateRequestId = 123l;
         final Long savedNavigateResultId = 321l;
-        NavigateRequestDto navigateRequestDto = new NavigateRequestDto();
-        navigateRequestDto.setInstructions(SAMPLE_VALID_INSTRUCTION);
-        navigateRequestDto.setRoomSize(Arrays.asList(5, 5));
-        navigateRequestDto.setCoords(Arrays.asList(1, 2));
-        navigateRequestDto.setPatches(Arrays.asList(Arrays.asList(1, 0), Arrays.asList(2, 2), Arrays.asList(2, 3)));
-
 
         NavigateRequest navigateRequest = new Mapper().mapToNavigateRequest(TestData.validNavigateRequestDto);
         NavigateResult navigateResult = new NavigateResult(navigateRequest, new Coordinate(1, 3), 1);
@@ -133,13 +124,6 @@ public class HooverServiceTest {
     void navigate_success_navigate_request_skidding_the_wall() throws UnProcessableEntityException {
         final Long savedNavigateRequestId = 123l;
         final Long savedNavigateResultId = 321l;
-        NavigateRequestDto navigateRequestDto = new NavigateRequestDto();
-        navigateRequestDto.setInstructions(SAMPLE_VALID_INSTRUCTION);
-        navigateRequestDto.setRoomSize(Arrays.asList(5, 5));
-        navigateRequestDto.setCoords(Arrays.asList(1, 2));
-        navigateRequestDto.setPatches(Arrays.asList(Arrays.asList(1, 0), Arrays.asList(2, 2), Arrays.asList(2, 3)));
-
-
         NavigateRequest navigateRequest = new Mapper().mapToNavigateRequest(TestData.validSkidWallRequestDto);
         NavigateResult navigateResult = new NavigateResult(navigateRequest, new Coordinate(0, 3), 1);
 
