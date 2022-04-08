@@ -3,15 +3,14 @@ package com.robotic.hoover.entity;
 import com.robotic.hoover.dto.Coordinate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "navigate_result")
 public class NavigateResult extends BaseEntity {

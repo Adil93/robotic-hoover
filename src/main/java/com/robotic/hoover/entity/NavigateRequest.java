@@ -1,10 +1,7 @@
 package com.robotic.hoover.entity;
 
 import com.robotic.hoover.dto.Coordinate;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
@@ -13,8 +10,6 @@ import javax.persistence.Table;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "navigate_request")
 public class NavigateRequest extends BaseEntity {

@@ -10,12 +10,12 @@ From the project root folder, Execute below steps:
 - Run using the jar file created:
   - java -jar target/robotic-hoover-1.0-SNAPSHOT.jar
 - Run using the maven command:
-  - mvn springboot:run
+  - mvn spring-boot:run
 
 # API
 
 - Robotic Hoover Navigation API
-  - POST {host}/robotic/hoover
+  - POST {host}/robotic/hoover/navigate
   - Request : 
 ```json
   {

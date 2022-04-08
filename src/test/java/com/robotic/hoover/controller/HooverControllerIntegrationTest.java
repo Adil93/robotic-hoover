@@ -4,9 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robotic.hoover.data.TestData;
 import com.robotic.hoover.dto.response.NavigateResponseDto;
 import com.robotic.hoover.errorHandling.ErrorCode;
-import com.robotic.hoover.repository.NavigateRequestRepository;
-import com.robotic.hoover.repository.NavigateResultRepository;
-import com.robotic.hoover.service.IHooverService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,20 +29,7 @@ public class HooverControllerIntegrationTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private HooverController hooverController;
-
-    @Autowired
-    private IHooverService hooverService;
-
-    @Autowired
-    private NavigateResultRepository navigateResultRepository;
-
-    @Autowired
-    private NavigateRequestRepository navigateRequestRepository;
-
-    @Autowired
     private ObjectMapper objectMapper;
-
 
     @Test
     public void return_bad_request_invalid_instructions() throws Exception {
